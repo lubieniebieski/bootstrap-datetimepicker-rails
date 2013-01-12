@@ -10,7 +10,6 @@ Gem::Specification.new do |gem|
   gem.email         = ["lubieniebieski@gmail.com"]
   gem.description   = %q{This gem packages the bootstrap-datetimepicker (JavaScripts & stylesheets) for Rails 3.1+ asset pipeline}
   gem.summary       = %q{bootstrap-datetimepicker's JavaScripts & stylesheets for Rails 3.1+ asset pipeline}
-  gem.homepage      = ""
-
+  gem.homepage      = "https://github.com/lubieniebieski/bootstrap-datetimepicker-rails"
   gem.files         = Dir["{lib,vendor}/**/*"] + ["LICENSE.txt", "README.md"]
 end
