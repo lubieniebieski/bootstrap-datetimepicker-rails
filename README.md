@@ -1,6 +1,6 @@
 # bootstrap-datetimepicker-rails
 
-This gem packages the bootstrap-datetimepicker (JavaScripts & stylesheets) for Rails 3.1+ asset pipeline. It adds ability to use http://tarruda.github.com/bootstrap-datetimepicker/ within your Rails app without puting files inside `vendor` directory.
+This gem packages the bootstrap-datetimepicker (JavaScripts & stylesheets) for Rails 3.1+ asset pipeline. It adds ability to use [bootstrap-datetimepicker plugin](http://tarruda.github.com/bootstrap-datetimepicker/) within your Rails app without puting files inside `vendor` directory.
 
 ## Installation
 
@@ -15,6 +15,10 @@ Add the following directive to your Javascript manifest file (`application.js`):
 If you want to include a localization file, also add the following directive:
 
     //= require locales/bootstrap-datetimepicker.<locale>.js>
+
+Add the following line to your stylesheet file (**warning**: seems to be working currently only with `*.css.less` files):
+
+    @import 'bootstrap-datetimepicker';
 
 ## Usage
 
