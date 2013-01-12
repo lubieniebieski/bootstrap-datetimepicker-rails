@@ -1,9 +1,9 @@
 require "bootstrap-datetimepicker-rails/version"
 
-module Bootstrap
-  module Datetimepicker
-    module Rails
-      # Your code goes here...
+module BootstrapDatetimepicker
+  module Rails
+    class Engine < ::Rails::Engine
     end
   end
 end
+

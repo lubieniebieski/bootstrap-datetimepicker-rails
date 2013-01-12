@@ -5,15 +5,12 @@ require 'bootstrap-datetimepicker-rails/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "bootstrap-datetimepicker-rails"
-  gem.version       = Bootstrap::Datetimepicker::Rails::VERSION
+  gem.version       = BootstrapDatetimepicker::Rails::VERSION
   gem.authors       = ["Adam Nowak"]
-  gem.email         = ["adam.nowak@netguru.pl"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.email         = ["lubieniebieski@gmail.com"]
+  gem.description   = %q{This gem packages the bootstrap-datetimepicker (JavaScripts & stylesheets) for Rails 3.1+ asset pipeline}
+  gem.summary       = %q{bootstrap-datetimepicker's JavaScripts & stylesheets for Rails 3.1+ asset pipeline}
   gem.homepage      = ""
 
-  gem.files         = `git ls-files`.split($/)
-  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
-  gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  gem.require_paths = ["lib"]
+  gem.files         = Dir["{lib,vendor}/**/*"] + ["LICENSE.txt", "README.md"]
 end
