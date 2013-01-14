@@ -22,7 +22,7 @@ Add the following line to your stylesheet file (**warning**: seems to be working
 
 ## Usage
 
-See the excellent demo provided by plugin's author (@tarruda) [here]( http://tarruda.github.com/bootstrap-datetimepicker/().
+See the excellent demo provided by plugin's author - [@tarruda](https://github.com/tarruda) [here](http://tarruda.github.com/bootstrap-datetimepicker/).
 
 ## Contributing
 
