@@ -16,9 +16,12 @@ If you want to include a localization file, also add the following directive:
 
     //= require locales/bootstrap-datetimepicker.<locale>.js>
 
-Add the following line to your stylesheet file (**warning**: seems to be working currently only with `*.css.less` files):
+Add the following line to your stylesheet file (`bootstrap_and_overrides.scss`):
 
-    @import 'bootstrap-datetimepicker';
+```scss
+@import 'bootstrap';
+@import 'bootstrap-datetimepicker';
+```
 
 ## Usage
 
