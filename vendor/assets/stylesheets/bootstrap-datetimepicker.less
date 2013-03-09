@@ -14,7 +14,7 @@
   width: 250px;
   padding: 4px;
   margin-top: 1px;
-  z-index: 1050;
+  z-index: 3000;
   .border-radius(4px);
   &:before {
     content: '';
@@ -42,6 +42,7 @@
     margin: 0;
   }
   .timepicker-hour, .timepicker-minute, .timepicker-second {
+    width: 100%;
     font-weight: bold;
     font-size: 1.2em;
   }
@@ -71,7 +72,7 @@
     &.day:hover,
     &.hour:hover,
     &.minute:hover,
-    &.second:hover, {
+    &.second:hover {
       background: @grayLighter;
       cursor: pointer;
     }
@@ -84,6 +85,12 @@
       .buttonBackground(@btnPrimaryBackground, spin(@btnPrimaryBackground, 20));
       color: #fff;
       text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+    }
+    &.disabled,
+    &.disabled:hover {
+      background: none;
+      color: @grayLight;
+      cursor: not-allowed;
     }
     span {
       display: block;
@@ -105,6 +112,12 @@
       &.old {
         color: @grayLight;
       }
+      &.disabled,
+      &.disabled:hover {
+        background: none;
+        color: @grayLight;
+        cursor: not-allowed;
+      }
     }
   }
 
@@ -115,6 +128,12 @@
     &.next,
     &.prev {
       font-size: @baseFontSize * 1.5;
+    }
+    &.disabled,
+    &.disabled:hover {
+      background: none;
+      color: @grayLight;
+      cursor: not-allowed;
     }
   }
 
