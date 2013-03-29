@@ -77,7 +77,7 @@
         icon.removeClass(this.timeIcon);
         icon.addClass(this.dateIcon);
       }
-      this.widget = $(getTemplate(this.timeIcon, options.pickDate, options.pickTime, options.pick12HourFormat, options.pickSeconds)).appendTo('body');
+      this.widget = $(getTemplate(this.timeIcon, options.pickDate, options.pickTime, options.pick12HourFormat, options.pickSeconds, options.collapse)).appendTo('body');
       this.minViewMode = options.minViewMode||this.$element.data('date-minviewmode')||0;
       if (typeof this.minViewMode === 'string') {
         switch (this.minViewMode) {
@@ -260,9 +260,20 @@
     },
 
     place: function(){
+      var position = 'absolute';
       var offset = this.component ? this.component.offset() : this.$element.offset();
+      offset.top = offset.top + this.height;
+
+      if (this._isInFixed()) {
+        var $window = $(window);
+        position = 'fixed';
+        offset.top -= $window.scrollTop();
+        offset.left -= $window.scrollLeft();
+      }
+
       this.widget.css({
-        top: offset.top + this.height,
+        position: position,
+        top: offset.top,
         left: offset.left
       });
     },
@@ -1024,7 +1035,23 @@
       if (!this.isInput) {
         $(document).off('mousedown.datetimepicker' + this.id);
       }
-    }
+    },
+    
+    _isInFixed: function() {
+      if (this.$element) {
+        var parents = this.$element.parents();
+        var inFixed = false;
+        for (var i=0; i<parents.length; i++) { 
+            if ($(parents[i]).css('position') == 'fixed') { 
+                inFixed = true; 
+                break; 
+            }  
+        };
+        return inFixed;        
+      } else {
+        return false;
+      }
+    }    
   };
 
   $.fn.datetimepicker = function ( option, val ) {
@@ -1047,7 +1074,8 @@
     pick12HourFormat: false,
     pickSeconds: true,
     startDate: -Infinity,
-    endDate: Infinity
+    endDate: Infinity,
+    collapse: true
   };
   $.fn.datetimepicker.Constructor = DateTimePicker;
   var dpgId = 0;
@@ -1096,18 +1124,18 @@
     else return Array(l - s.length + 1).join(c || ' ') + s;
   }
 
-  function getTemplate(timeIcon, pickDate, pickTime, is12Hours, showSeconds) {
+  function getTemplate(timeIcon, pickDate, pickTime, is12Hours, showSeconds, collapse) {
     if (pickDate && pickTime) {
       return (
         '<div class="bootstrap-datetimepicker-widget dropdown-menu">' +
           '<ul>' +
-            '<li class="collapse in">' +
+            '<li' + (collapse ? ' class="collapse in"' : '') + '>' +
               '<div class="datepicker">' +
                 DPGlobal.template +
               '</div>' +
             '</li>' +
-            '<li class="picker-switch"><a class="accordion-toggle"><i class="' + timeIcon + '"></i></a></li>' +
-            '<li class="collapse">' +
+            '<li class="picker-switch accordion-toggle"><a><i class="' + timeIcon + '"></i></a></li>' +
+            '<li' + (collapse ? ' class="collapse"' : '') + '>' +
               '<div class="timepicker">' +
                 TPGlobal.getTemplate(is12Hours, showSeconds) +
               '</div>' +
