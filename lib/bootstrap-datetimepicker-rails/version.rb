@@ -1,5 +1,5 @@
 module BootstrapDatetimepicker
   module Rails
-    VERSION = "0.0.10.1"
+    VERSION = "0.0.11"
   end
 end

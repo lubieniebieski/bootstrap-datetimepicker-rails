@@ -1,7 +1,7 @@
 /**
  * @license
  * =========================================================
- * bootstrap-datetimepicker.js 
+ * bootstrap-datetimepicker.js
  * http://www.eyecon.ro/bootstrap-datepicker
  * =========================================================
  * Copyright 2012 Stefan Petre
@@ -32,7 +32,7 @@
     this.id = dpgId++;
     this.init(element, options);
   };
-  
+
   var dateToDate = function(dt) {
     if (typeof dt === 'string') {
       return new Date(dt);
@@ -54,7 +54,7 @@
       this.pickTime = options.pickTime;
       this.isInput = this.$element.is('input');
       this.component = false;
-      if (this.$element.is('.input-append') || this.$element.is('.input-prepend'))
+      if (this.$element.find('.input-append') || this.$element.find('.input-prepend'))
           this.component = this.$element.find('.add-on');
       this.format = options.format;
       if (!this.format) {
@@ -206,7 +206,7 @@
       if (!date) this.setValue(null);
       else this.setValue(date.valueOf());
     },
-    
+
     setStartDate: function(date) {
       if (date instanceof Date) {
         this.startDate = date;
@@ -222,7 +222,7 @@
         this.update();
       }
     },
-    
+
     setEndDate: function(date) {
       if (date instanceof Date) {
         this.endDate = date;
@@ -262,19 +262,40 @@
     place: function(){
       var position = 'absolute';
       var offset = this.component ? this.component.offset() : this.$element.offset();
+      this.width = this.component ? this.component.outerWidth() : this.$element.outerWidth();
       offset.top = offset.top + this.height;
 
+      var $window = $(window);
+      
+      if ( this.options.width != undefined ) {
+        this.widget.width( this.options.width );
+      }
+      
+      if ( this.options.orientation == 'left' ) {
+        this.widget.addClass( 'left-oriented' );
+        offset.left   = offset.left - this.widget.width() + 20;
+      }
+      
       if (this._isInFixed()) {
-        var $window = $(window);
         position = 'fixed';
         offset.top -= $window.scrollTop();
         offset.left -= $window.scrollLeft();
       }
 
+      if ($window.width() < offset.left + this.widget.outerWidth()) {
+        offset.right = $window.width() - offset.left - this.width;
+        offset.left = 'auto';
+        this.widget.addClass('pull-right');
+      } else {
+        offset.right = 'auto';
+        this.widget.removeClass('pull-right');
+      }
+
       this.widget.css({
         position: position,
         top: offset.top,
-        left: offset.left
+        left: offset.left,
+        right: offset.right
       });
     },
 
@@ -294,7 +315,10 @@
         } else {
           dateStr = this.$element.find('input').val();
         }
-        if (!dateStr) {
+        if (dateStr) {
+          this._date = this.parseDate(dateStr);
+        }
+        if (!this._date) {
           var tmp = new Date()
           this._date = UTCDate(tmp.getFullYear(),
                               tmp.getMonth(),
@@ -303,8 +327,6 @@
                               tmp.getMinutes(),
                               tmp.getSeconds(),
                               tmp.getMilliseconds())
-        } else {
-          this._date = this.parseDate(dateStr);
         }
       }
       this.viewDate = UTCDate(this._date.getUTCFullYear(), this._date.getUTCMonth(), 1, 0, 0, 0, 0);
@@ -314,11 +336,10 @@
 
     fillDow: function() {
       var dowCnt = this.weekStart;
-      var html = '<tr>';
+      var html = $('<tr>');
       while (dowCnt < this.weekStart + 7) {
-        html += '<th class="dow">' + dates[this.language].daysMin[(dowCnt++) % 7] + '</th>';
+        html.append('<th class="dow">' + dates[this.language].daysMin[(dowCnt++) % 7] + '</th>');
       }
-      html += '</tr>';
       this.widget.find('.datepicker-days thead').append(html);
     },
 
@@ -344,14 +365,14 @@
       var startMonth = typeof this.startDate === 'object' ? this.startDate.getUTCMonth() : -1;
       var endYear  = typeof this.endDate === 'object' ? this.endDate.getUTCFullYear() : Infinity;
       var endMonth = typeof this.endDate === 'object' ? this.endDate.getUTCMonth() : 12;
-      
+
       this.widget.find('.datepicker-days').find('.disabled').removeClass('disabled');
       this.widget.find('.datepicker-months').find('.disabled').removeClass('disabled');
       this.widget.find('.datepicker-years').find('.disabled').removeClass('disabled');
-      
+
       this.widget.find('.datepicker-days th:eq(1)').text(
         dates[this.language].months[month] + ' ' + year);
-          
+
       var prevMonth = UTCDate(year, month-1, 28, 0, 0, 0, 0);
       var day = DPGlobal.getDaysInMonth(
         prevMonth.getUTCFullYear(), prevMonth.getUTCMonth());
@@ -363,15 +384,17 @@
       if ((year == endYear && month >= endMonth) || year > endYear) {
         this.widget.find('.datepicker-days th:eq(2)').addClass('disabled');
       }
-      
+
       var nextMonth = new Date(prevMonth.valueOf());
       nextMonth.setUTCDate(nextMonth.getUTCDate() + 42);
       nextMonth = nextMonth.valueOf();
       var html = [];
+      var row;
       var clsName;
       while (prevMonth.valueOf() < nextMonth) {
         if (prevMonth.getUTCDay() === this.weekStart) {
-          html.push('<tr>');
+          row = $('<tr>');
+          html.push(row);
         }
         clsName = '';
         if (prevMonth.getUTCFullYear() < year ||
@@ -392,13 +415,10 @@
         if (prevMonth.valueOf() > this.endDate) {
           clsName += ' disabled';
         }
-        html.push('<td class="day' + clsName + '">' + prevMonth.getUTCDate() + '</td>');
-        if (prevMonth.getUTCDay() === this.weekEnd) {
-          html.push('</tr>');
-        }
+        row.append('<td class="day' + clsName + '">' + prevMonth.getUTCDate() + '</td>');
         prevMonth.setUTCDate(prevMonth.getUTCDate() + 1);
       }
-      this.widget.find('.datepicker-days tbody').empty().append(html.join(''));
+      this.widget.find('.datepicker-days tbody').empty().append(html);
       var currentYear = this._date.getUTCFullYear();
 
       var months = this.widget.find('.datepicker-months').find(
@@ -410,7 +430,7 @@
         this.widget.find('.datepicker-months th:eq(0)').addClass('disabled');
       }
       if (currentYear + 1 > endYear) {
-        this.widget.find('.datepicker-months th:eq(2)').addClass('disabled'); 
+        this.widget.find('.datepicker-months th:eq(2)').addClass('disabled');
       }
       for (var i = 0; i < 12; i++) {
         if ((year == startYear && startMonth > i) || (year < startYear)) {
@@ -680,7 +700,7 @@
             if (value === 12) value = 0;
             else value = value % 12;
           }
-        } 
+        }
         this._date.setUTCHours(value);
         this.actions.showPicker.call(this);
       },
@@ -1036,22 +1056,22 @@
         $(document).off('mousedown.datetimepicker' + this.id);
       }
     },
-    
+
     _isInFixed: function() {
       if (this.$element) {
         var parents = this.$element.parents();
         var inFixed = false;
-        for (var i=0; i<parents.length; i++) { 
-            if ($(parents[i]).css('position') == 'fixed') { 
-                inFixed = true; 
-                break; 
-            }  
+        for (var i=0; i<parents.length; i++) {
+            if ($(parents[i]).css('position') == 'fixed') {
+                inFixed = true;
+                break;
+            }
         };
-        return inFixed;        
+        return inFixed;
       } else {
         return false;
       }
-    }    
+    }
   };
 
   $.fn.datetimepicker = function ( option, val ) {
@@ -1189,7 +1209,7 @@
     getDaysInMonth: function (year, month) {
       return [31, (DPGlobal.isLeapYear(year) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month]
     },
-    headTemplate: 
+    headTemplate:
       '<thead>' +
         '<tr>' +
           '<th class="prev">&lsaquo;</th>' +
