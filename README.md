@@ -27,6 +27,10 @@ Add the following line to your stylesheet file (`bootstrap_and_overrides.scss`):
 
 See the excellent demo provided by plugin's author - [@tarruda](https://github.com/tarruda) [here](http://tarruda.github.com/bootstrap-datetimepicker/).
 
+## Contributing to the original plugin
+
+If you've encountered some plugin-related issues, please contribute directly to https://github.com/tarruda/bootstrap-datetimepicker/issues.
+
 ## Contributing
 
 1. Fork it
