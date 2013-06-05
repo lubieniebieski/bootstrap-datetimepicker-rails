@@ -14,7 +14,7 @@ Add the following directive to your Javascript manifest file (`application.js`):
 
 If you want to include a localization file, also add the following directive:
 
-    //= require locales/bootstrap-datetimepicker.<locale>.js>
+    //= require locales/bootstrap-datetimepicker.<locale>
 
 Add the following line to your stylesheet file (`bootstrap_and_overrides.scss`):
 
