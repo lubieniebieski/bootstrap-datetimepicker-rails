@@ -1272,12 +1272,12 @@
           '</td>' : '') +
         '</tr>' +
         '<tr>' +
-          '<td><a href="#" class="btn" data-action="decrementHours"><i class="glyphicon-chevron-down"></i></a></td>' +
+          '<td><a href="#" class="btn" data-action="decrementHours"><i class="glyphicon glyphicon-chevron-down"></i></a></td>' +
           '<td class="separator"></td>' +
-          '<td><a href="#" class="btn" data-action="decrementMinutes"><i class="glyphicon-chevron-down"></i></a></td>' +
+          '<td><a href="#" class="btn" data-action="decrementMinutes"><i class="glyphicon glyphicon-chevron-down"></i></a></td>' +
           (showSeconds ?
           '<td class="separator"></td>' +
-          '<td><a href="#" class="btn" data-action="decrementSeconds"><i class="glyphicon-chevron-down"></i></a></td>': '') +
+          '<td><a href="#" class="btn" data-action="decrementSeconds"><i class="glyphicon glyphicon-chevron-down"></i></a></td>': '') +
           (is12Hours ? '<td class="separator"></td>' : '') +
         '</tr>' +
       '</table>' +
