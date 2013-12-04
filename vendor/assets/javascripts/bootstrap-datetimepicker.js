@@ -972,7 +972,7 @@
             expanded.collapse('hide');
             closed.collapse('show')
             $this.find('i').toggleClass(self.timeIcon + ' ' + self.dateIcon);
-            self.$element.find('.add-on i').toggleClass(self.timeIcon + ' ' + self.dateIcon);
+            self.$element.find('.input-add-on span.glyphicon').toggleClass(self.timeIcon + ' ' + self.dateIcon);
           }
         });
       }
@@ -1154,7 +1154,7 @@
                 DPGlobal.template +
               '</div>' +
             '</li>' +
-            '<li class="picker-switch accordion-toggle"><a><i class="' + timeIcon + '"></i></a></li>' +
+            '<li class="picker-switch accordion-toggle"><a><span class="glyphicon ' + timeIcon + '"></span></a></li>' +
             '<li' + (collapse ? ' class="collapse"' : '') + '>' +
               '<div class="timepicker">' +
                 TPGlobal.getTemplate(is12Hours, showSeconds) +
