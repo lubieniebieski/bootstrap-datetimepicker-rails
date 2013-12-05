@@ -966,13 +966,16 @@
           var expanded = $parent.find('.collapse.in');
           var closed = $parent.find('.collapse:not(.in)');
 
+          console.log(expanded);
+          console.log(closed);
+
           if (expanded && expanded.length) {
             var collapseData = expanded.data('collapse');
             if (collapseData && collapseData.transitioning) return;
             expanded.collapse('hide');
             closed.collapse('show')
-            $this.find('i').toggleClass(self.timeIcon + ' ' + self.dateIcon);
-            self.$element.find('.input-add-on span.glyphicon').toggleClass(self.timeIcon + ' ' + self.dateIcon);
+            $this.find('span.glyphicon').toggleClass(self.timeIcon + ' ' + self.dateIcon);
+            self.$element.find('.input-group-addon span.glyphicon').toggleClass(self.timeIcon + ' ' + self.dateIcon);
           }
         });
       }
