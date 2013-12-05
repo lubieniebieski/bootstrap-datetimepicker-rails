@@ -967,13 +967,13 @@
           var closed = $parent.find('.collapse:not(.in)');
 
           console.log(expanded);
-          console.log(expanded);
+          console.log(closed);
 
           if (expanded && expanded.length) {
             var collapseData = expanded.data('collapse');
             if (collapseData && collapseData.transitioning) return;
-            expanded.collapse('hide');
-            closed.collapse('show');
+            expanded.removeClass('in');
+            closed.addClass('in');
             // expanded.collapse({"toggle": true, "parent": '.accordion-toggle'});
             // closed.collapse({"toggle": true, "parent": '.accordion-toggle'});
             $this.find('span.glyphicon').toggleClass(self.timeIcon + ' ' + self.dateIcon);
