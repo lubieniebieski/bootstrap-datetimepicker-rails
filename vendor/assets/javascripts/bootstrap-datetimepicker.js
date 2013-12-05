@@ -967,13 +967,15 @@
           var closed = $parent.find('.collapse:not(.in)');
 
           console.log(expanded);
-          console.log(closed);
+          console.log(expanded);
 
           if (expanded && expanded.length) {
             var collapseData = expanded.data('collapse');
             if (collapseData && collapseData.transitioning) return;
             expanded.collapse('hide');
-            closed.collapse('show')
+            closed.collapse('show');
+            // expanded.collapse({"toggle": true, "parent": '.accordion-toggle'});
+            // closed.collapse({"toggle": true, "parent": '.accordion-toggle'});
             $this.find('span.glyphicon').toggleClass(self.timeIcon + ' ' + self.dateIcon);
             self.$element.find('.input-group-addon span.glyphicon').toggleClass(self.timeIcon + ' ' + self.dateIcon);
           }
