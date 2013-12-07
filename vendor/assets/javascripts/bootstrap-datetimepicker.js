@@ -966,9 +966,6 @@
           var expanded = $parent.find('.collapse.in');
           var closed = $parent.find('.collapse:not(.in)');
 
-          console.log(expanded);
-          console.log(closed);
-
           if (expanded && expanded.length) {
             var collapseData = expanded.data('collapse');
             if (collapseData && collapseData.transitioning) return;
