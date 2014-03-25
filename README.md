@@ -29,9 +29,16 @@ or if you're having problems (or using less) require it in your main stylesheet 
 *= require bootstrap-datetimepicker
 ```
 
+##Quick instruction
+
+Call the datetimepicker via javascript:
+
+    $('.datepicker').fdatetimepicker()
+
 ## Usage
 
 See the excellent demo provided by plugin's author - [@tarruda](https://github.com/tarruda) [here](http://tarruda.github.com/bootstrap-datetimepicker/).
+
 
 ## Contributing to the original plugin
 
