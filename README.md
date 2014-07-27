@@ -1,3 +1,7 @@
+## :warning: !not actively maintained!
+
+please refer to https://github.com/TrevorS/bootstrap3-datetimepicker-rails in order to find a gem version compatible with Boostrap 3.
+
 # bootstrap-datetimepicker-rails
 
 This gem packages the bootstrap-datetimepicker (JavaScripts & stylesheets) for Rails 3.1+ asset pipeline. It adds ability to use [bootstrap-datetimepicker plugin](http://tarruda.github.com/bootstrap-datetimepicker/) within your Rails app without puting files inside `vendor` directory.
